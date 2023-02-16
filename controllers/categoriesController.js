@@ -2,6 +2,10 @@ const Categorie = require("../models/categorie");
 const Item = require("../models/item");
 const { body, validationResult } = require("express-validator");
 
+exports.index = (req, res, next) => {
+  res.render("index", { title: "Inventory" });
+};
+
 exports.categorie_list = (req, res, next) => {
   Categorie.find()
     .sort({ name: 1 })
