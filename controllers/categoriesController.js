@@ -6,18 +6,16 @@ exports.index = (req, res, next) => {
   res.render("index", { title: "Inventory" });
 };
 
-exports.categorie_list = (req, res, next) => {
-  Categorie.find()
-    .sort({ name: 1 })
-    .exec(function (err, categorie_list) {
-      if (err) {
-        return next(err);
-      }
-      res.render("categorie_list", {
-        title: "Categories",
-        categorie_list: categorie_list,
-      });
+exports.categorie_list = async (req, res, next) => {
+  try {
+    const categorie_list = await Categorie.find().sort({ name: 1 }).exec();
+    return res.render("categorie_list", {
+      title: "Categories",
+      categorie_list: categorie_list,
     });
+  } catch (err) {
+    return next(err);
+  }
 };
 
 exports.item_list_by_categorie = async (req, res, next) => {
@@ -42,7 +40,8 @@ exports.item_list_by_categorie = async (req, res, next) => {
 };
 
 exports.categorie_create_get = (req, res, next) => {
-  return res.render("categorie_form", { title: "Create Categorie" });
+  return res.send("test");
+  // return res.render("categorie_form", { title: "Create Categorie" });
 };
 
 exports.categorie_create_post = [
