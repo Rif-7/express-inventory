@@ -1,0 +1,15 @@
+extends layout 
+
+block content 
+  h1= title
+  form(method='POST' action='')
+    div.form_group
+        label(for='name') Categorie name:
+        input.form_control(type='text' name='name' placeholder='Furniture..' value=(categorie === undefined ? '' : categorie.name))
+
+        button.btn.btn-primary(type='submit') Submit
+
+  if errors
+    ul
+      for error in errors
+        li!= error.msg

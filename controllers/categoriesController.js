@@ -40,8 +40,7 @@ exports.item_list_by_categorie = async (req, res, next) => {
 };
 
 exports.categorie_create_get = (req, res, next) => {
-  return res.send("test");
-  // return res.render("categorie_form", { title: "Create Categorie" });
+  return res.render("categorie_form", { title: "Create Categorie" });
 };
 
 exports.categorie_create_post = [
@@ -51,19 +50,19 @@ exports.categorie_create_post = [
     .escape()
     .withMessage("Categorie name must be specified"),
   (req, res, next) => {
+    const categorie = new Categorie({
+      name: req.body.name,
+    });
+
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
       return res.render("categorie_form", {
         title: "Create Categorie",
         errors: errors.array(),
-        categorie: req.body,
+        categorie: categorie,
       });
     }
-
-    const categorie = new Categorie({
-      name: req.body.name,
-    });
 
     categorie.save((err) => {
       if (err) {
