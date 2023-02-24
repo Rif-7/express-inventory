@@ -57,7 +57,6 @@ exports.item_create_post = [
       res.render("item_form", {
         title: "Create Item",
         categories_list: categories_list,
-        selected_categorie: req.body.categorie,
         item: item,
         errors: errors.array(),
       });

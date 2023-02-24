@@ -5,7 +5,7 @@ block content
   form(method='POST' action='')
     div.form_group
         label(for='name') Categorie name:
-        input.form_control(type='text' name='name' placeholder='Furniture..' value=(categorie === undefined ? '' : categorie.name))
+        input#name.form_control(type='text' name='name' placeholder='Furniture..' value=(categorie === undefined ? '' : categorie.name))
 
         button.btn.btn-primary(type='submit') Submit
 
