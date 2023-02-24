@@ -49,7 +49,7 @@ exports.categorie_create_post = [
     .isLength({ min: 1 })
     .escape()
     .withMessage("Categorie name must be specified"),
-  (req, res, next) => {
+  async (req, res, next) => {
     const categorie = new Categorie({
       name: req.body.name,
     });
@@ -62,6 +62,11 @@ exports.categorie_create_post = [
         errors: errors.array(),
         categorie: categorie,
       });
+    }
+
+    const duplicate = await Categorie.findOne({ name: req.body.name }).exec();
+    if (duplicate) {
+      return res.redirect(duplicate.url);
     }
 
     categorie.save((err) => {
