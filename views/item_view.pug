@@ -3,6 +3,7 @@ extends layout
 block content 
   div.item_field
     h1= item.name
+    a(href=item.categorie.url) #{item.categorie.name}
     hr
     p= item.description 
 

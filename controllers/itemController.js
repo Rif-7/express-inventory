@@ -61,7 +61,9 @@ exports.item_create_post = [
 
 exports.item_view = async (req, res, next) => {
   try {
-    const item = await Item.findById(req.params.id);
+    const item = await Item.findById(req.params.id)
+      .populate("categorie")
+      .exec();
     if (item === null) {
       const error = new Error("Item not found");
       error.status = 404;
