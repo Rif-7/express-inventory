@@ -71,6 +71,8 @@ exports.item_view = async (req, res, next) => {
       error.status = 404;
       return next(err);
     }
+
+    return res.render("item_view", { title: "Item", item: item });
   } catch (err) {
     return next(err);
   }

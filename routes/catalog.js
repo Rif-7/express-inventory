@@ -20,4 +20,6 @@ router.get("/item/create", item_controller.item_create_get);
 
 router.post("/item/create", item_controller.item_create_post);
 
+router.get("/item/:id", item_controller.item_view);
+
 module.exports = router;

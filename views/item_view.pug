@@ -1,0 +1,13 @@
+extends layout 
+
+block content 
+  div.item_field
+    h1= item.name
+    hr
+    p= item.description 
+
+    ul 
+      li Price:  #{item.price}
+      li Stock:  #{item.stock}
+    
+    button.btn.btn-primary Edit
