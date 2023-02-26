@@ -14,12 +14,14 @@ router.post("/categorie/create", categorie_controller.categorie_create_post);
 
 router.get("/categorie/:id", categorie_controller.item_list_by_categorie);
 
-router.get("/items", item_controller.item_list);
-
 router.get("/item/create", item_controller.item_create_get);
 
 router.post("/item/create", item_controller.item_create_post);
 
 router.get("/item/:id", item_controller.item_view);
+
+router.get("/item/:id/update", item_controller.item_update_get);
+
+router.post("/item/:id/update", item_controller.item_update_post);
 
 module.exports = router;

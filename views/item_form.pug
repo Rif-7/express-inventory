@@ -1,7 +1,7 @@
 extends layout 
 
 block content 
-  h1= title 
+  h1!= title 
   
   form(method='POST' action='')
     div.form_group 
@@ -10,7 +10,8 @@ block content
     
     div.form_group
       label(for='description') Description:
-      input#description(type='textfield' required='true' name='description' value=(item === undefined ? '' : item.description) )
+      textarea#description(required='true' name='description')
+        != item == undefined ? '' : item.description
     
     div.form_group 
       label(for='categorie') Categorie:
@@ -29,13 +30,16 @@ block content
     
     div.form_group
       label(for='price') Price: 
-      input#price(type='number' name='price' required='true' min='1')
+      input#price(type='number' name='price' required='true' min='1' value=(item === undefined ? '' : item.price))
     
     div.form_group
       label(for='stock') Stock: 
-      input#price(type='number')
+      input#stock(type='number' name='stock' value=(item === undefined ? '' : item.stock))
 
-    
+    if askPassword 
+      div.form_group
+        label(for='password') Password: 
+        input#password(type='text' name='password' required='true')
     button.btn.btn-primary(type='submit') Submit
         
   if errors
