@@ -3,15 +3,7 @@ const Categorie = require("../models/categorie");
 const { body, validationResult } = require("express-validator");
 
 exports.item_list = (req, res, next) => {
-  Item.find()
-    .populate("categorie")
-    .sort({ name: 1, categorie: 1 })
-    .exec(function (err, item_list) {
-      if (err) {
-        return next(err);
-      }
-      res.render("item_list", { title: "Items", item_list: item_list });
-    });
+  return;
 };
 
 exports.item_create_get = async (req, res, next) => {
@@ -70,3 +62,16 @@ exports.item_create_post = [
     }
   },
 ];
+
+exports.item_view = async (req, res, next) => {
+  try {
+    const item = await Item.findById(req.params.id);
+    if (item === null) {
+      const error = new Error("Item not found");
+      error.status = 404;
+      return next(err);
+    }
+  } catch (err) {
+    return next(err);
+  }
+};

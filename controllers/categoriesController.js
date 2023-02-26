@@ -2,8 +2,17 @@ const Categorie = require("../models/categorie");
 const Item = require("../models/item");
 const { body, validationResult } = require("express-validator");
 
-exports.index = (req, res, next) => {
-  res.render("index", { title: "Inventory" });
+exports.index = async (req, res, next) => {
+  try {
+    const item_list = await Item.find()
+      .populate("categorie")
+      .sort({ name: 1, categorie: 1 })
+      .exec();
+
+    return res.render("index", { title: "Inventory", item_list: item_list });
+  } catch (err) {
+    return next(err);
+  }
 };
 
 exports.categorie_list = async (req, res, next) => {
