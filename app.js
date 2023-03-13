@@ -3,16 +3,15 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 const indexRouter = require("./routes/index");
 const catalogRouter = require("./routes/catalog");
 
 const app = express();
 
-const mongoDB =
-  "mongodb+srv://testUser:testPasswordD1@cluster0.einuf1a.mongodb.net/inventory?retryWrites=true&w=majority";
+const mongoDB = `mongodb+srv://${process.env.MONGO_CREDS}@cluster0.einuf1a.mongodb.net/inventory?retryWrites=true&w=majority`;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
